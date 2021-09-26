@@ -5,7 +5,6 @@ import java.util.*;
 public class Bank {
     private Map<User, List<Account>> users = new HashMap<>();
 
-
     public void addUser(User user) {
         users.putIfAbsent(user, new ArrayList<Account>());
     }
@@ -57,6 +56,23 @@ public class Bank {
         }
         return rsl;
     }
+
+    public static int rubleToDollar(int value) {
+        int rsl = value / 73;
+        return rsl;
+    }
+
+    public static int rubleToEuro(int value) {
+        int rsl = value / 85;
+        return rsl;
+    }
+
+    public Account checkBalance(String requisite, String passport) {
+        Account user = findByRequisite(passport, requisite);
+        System.out.println("На счету: " + user.getBalance() + " Рублей");
+        return null;
+    }
+
 
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {

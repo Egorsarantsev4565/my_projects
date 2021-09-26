@@ -51,4 +51,39 @@ public class BankTest {
         bank.addAccount(user.getPassport(), new Account("5546", 150D));
         assertThat(bank.deleteByRequisite("5546", "3434"),is(true));
     }
+
+    @Test
+    public void converter1() {
+        assertThat(Bank.rubleToEuro(170), is (2));
+    }
+
+    @Test
+    public void converter2() {
+        assertThat(Bank.rubleToEuro(8500), is (100));
+    }
+
+    @Test
+    public void converter3() {
+        assertThat(Bank.rubleToDollar(730), is (10));
+    }
+
+    @Test
+    public void converter4() {
+        assertThat(Bank.rubleToDollar(73), is (1));
+    }
+
+    @Test
+    public void balance() {
+        User user = new User("3434", "Petr Arsentev");
+        Bank bank = new Bank();
+        bank.addUser(user);
+        bank.addAccount(user.getPassport(), new Account("5546",50000));
+        bank.addAccount(user.getPassport(), new Account("113", 50000));
+        bank.checkBalance("5546","3434");
+        bank.transferMoney(user.getPassport(), "5546", user.getPassport(), "113", 15000);
+        bank.checkBalance("5546","3434");
+        bank.checkBalance("113","3434");
+    }
+
+
 }
